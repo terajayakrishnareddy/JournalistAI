@@ -2164,7 +2164,7 @@
           AI Settings
         </div>
 
-        <a href="/api/docs" target="_blank" class="nav-item">
+        <a id="api-docs-link" href="http://127.0.0.1:8000/api/docs" target="_blank" class="nav-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="16 18 22 12 16 6"/>
             <polyline points="8 6 2 12 8 18"/>
@@ -2921,8 +2921,12 @@
       const saved = (localStorage.getItem('backend_url') || '').trim();
       if (saved) return saved.replace(/\/+$/, '');
       if (window.location.protocol === 'file:') return 'http://127.0.0.1:8000';
+      if (window.location.hostname.endsWith('github.io')) return 'http://127.0.0.1:8000';
       return '';
     }
+
+    const apiDocsLink = document.getElementById('api-docs-link');
+    if (apiDocsLink) apiDocsLink.href = getApiBase() + '/api/docs';
 
     // Intercept fetch so every relative /api/... call is rewritten to the
     // configured backend URL. This avoids editing every fetch() call.
