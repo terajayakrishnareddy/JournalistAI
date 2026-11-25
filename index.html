@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JournalistAI Studio</title>
+</head>
+<body>
+  <p>Opening JournalistAI Studio...</p>
+  <p><a href="./static/index.html">Open the app</a></p>
+  <script>
+    let path = location.pathname;
+    if (path.endsWith('.html') || path.endsWith('.htm')) {
+      path = path.substring(0, path.lastIndexOf('/') + 1);
+    } else if (!path.endsWith('/')) {
+      path += '/';
+    }
+    location.replace(`${path}static/index.html${location.search}${location.hash}`);
+  </script>
+</body>
+</html>
